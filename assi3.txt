@@ -1,0 +1,132 @@
+from collections import deque
+
+def is_palindrome(input_str):
+    input_str = input_str.lower().replace(" ", "")
+    char_queue = deque(input_str)
+
+    while len(char_queue) > 1:
+        if char_queue.popleft() != char_queue.pop():
+            return False
+
+    return True
+
+def is_balanced(expression):
+    stack = []
+    pairs = {')': '(', '}': '{', ']': '['}
+
+    for char in expression:
+        if char in "([{":
+            stack.append(char)
+        elif char in ")]}":
+            if not stack or stack[-1] != pairs[char]:
+                return False
+            stack.pop()
+
+    return not stack
+
+# Get user input
+user_input = input("Enter a string or expression: ")
+
+is_palindrome_result = is_palindrome(user_input)
+is_balanced_result = is_balanced(user_input)
+
+print("Is palindrome:", is_palindrome_result)
+print("Is expression balanced:", is_balanced_result)
+
+******************************************************************
+
+
+class Car_Wash:
+    def __init__(self):
+        self.queue = []
+
+    def enqueue(self, CarName, color, plate_number):
+        car = {"make": CarName, "color": color, "plate_number": plate_number}
+        self.queue.append(car)
+
+    def dequeue(self):
+        if not self.isEmpty():
+            return self.queue.pop(0)
+        else:
+            return None
+
+    def size(self):
+        return len(self.queue)
+
+    def isEmpty(self):
+        return len(self.queue) == 0
+
+    def front(self):
+        if not self.isEmpty():
+            return self.queue[0]
+        else:
+            return None
+
+    def menu(self):
+        while True:
+            print("\nCar Wash Queue Menu:")
+            print("1. Insert a car to the queue")
+            print("2. Remove the car from the queue")
+            print("3. Close the program")
+
+            choice = input("Enter your choice: ")
+
+            if choice == "1":
+                CarName = input("Enter car Name: ")
+                color = input("Enter car color: ")
+                plate_number = input("Enter car plate number: ")
+                self.enqueue(CarName, color, plate_number)
+                print("Car added to the queue.")
+
+            elif choice == "2":
+                if not self.isEmpty():
+                    car = self.dequeue()
+                    print("Car removed from the queue:")
+                    print(f"Make: {car['make']}, Color: {car['color']}, Plate Number: {car['plate_number']}")
+                else:
+                    print("Queue is empty.")
+
+            elif choice == "3":
+                print("Closing the program.")
+                break
+
+            else:
+                print("Invalid choice. Please enter 1, 2, or 3.")
+
+def main():
+    car_wash_queue = Car_Wash()
+    car_wash_queue.menu()
+
+if __name__ == "__main__":
+    main()
+
+
+**********************************************************************************************************
+
+def decode_text(SMS):
+    stack = []
+    decoded_text = []
+
+    for char in SMS :
+        if char.isalpha() or char.isspace():
+            stack.append(char)
+        elif char == "*":
+            if stack:
+                decoded_text.append(stack.pop())
+
+    # Pop any remaining characters from the stack
+    while stack:
+        decoded_text.append(stack.pop())
+
+    return ''.join(decoded_text)
+
+# Get user input for the message
+user_input = input("Enter the text to decode: ")
+decoded_result = decode_text(user_input)
+print("Decoded text:", decoded_result)
+
+
+
+
+
+
